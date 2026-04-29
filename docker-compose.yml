@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  backend:
+    image: shieldxbot/backend:latest
+    ports:
+      - "3000:3000"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  frontend:
+    image: shieldxbot/client:latest
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
